@@ -18,6 +18,9 @@ $('.gender').click(function() {
 let grade = 0;
 $(document).on('input', '#slider', function() {
     grade = $(this).val();
+    grade = grade > 0 ? Math.ceil(grade) : Math.floor(grade);
+    $('.grade').removeClass('active');
+    $('.grade' + grade).addClass('active');
 });
 
 let questionsArray = {
