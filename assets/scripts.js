@@ -3,24 +3,13 @@ $('.gender').click(function() {
     if ($(this).find('.btn-primary').length>0) {
         $(this).find('.btn').toggleClass('btn-primary');
     }
+
     $(this).find('.btn').toggleClass('btn-default');
+    localStorage.setItem('gender', $(this).find('.active').val());
 
-
-    localStorage.setItem("gender", $(this).find('.active').val());
-
-    if (localStorage.getItem("gender") !== null) {
+    if (localStorage.getItem('gender') !== null) {
         $('.start-test').removeClass('disabled');
     }
-});
-
-
-
-let grade = 0;
-$(document).on('input', '#slider', function() {
-    grade = $(this).val();
-    grade = grade > 0 ? Math.ceil(grade) : Math.floor(grade);
-    $('.grade').removeClass('active');
-    $('.grade' + grade).addClass('active');
 });
 
 let questionsArray = {
@@ -126,8 +115,6 @@ let questionsArray = {
     }
 };
 
-
-
 let types = {
     'goalsInLife': [3, 4, 10, 16, 17, 18],
     'lifeProcess': [1, 2, 4, 5, 7, 9],
@@ -135,3 +122,4 @@ let types = {
     'myLocusControl': [1, 15, 16, 19],
     'lifeLocusControl': [7, 10, 11, 14, 18, 19]
 }
+

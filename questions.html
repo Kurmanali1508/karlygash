@@ -64,24 +64,6 @@
 
 
 <script src="assets/scripts.js"></script>
-<script>
-    let gender = localStorage.getItem("gender");
-
-    if (gender === null || gender === undefined) {
-        window.location.href = 'index.html';
-    }
-
-    let answers = localStorage.getItem("answers");
-
-    if (!answers) {
-        $('.first-question').text(questionsArray["1"].firstQuestion);
-        $('.second-question').text(questionsArray["1"].secondQuestion);
-    }
-
-    $('.next-question').click(function () {
-
-    })
-
-</script>
+<script src="assets/questions.js"></script>
 </body>
 </html>
