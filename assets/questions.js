@@ -34,6 +34,8 @@ $('.next-question').click(function () {
         $('.next-question').text('Получить результат');
     }
     if (questionId === questionsCount) {
+        localStorage.setItem('resultAnswers', JSON.stringify(answers));
+        localStorage.removeItem('answers');
         window.location.href = 'result.html';
         return;
     }
@@ -53,6 +55,7 @@ $('.prev-question').click(function () {
         $('.prev-question').attr("disabled", true);
         return;
     }
+
     questionId--;
     changeQuestion(questionId);
 });
@@ -71,6 +74,8 @@ function changeQuestion() {
     changeGrade(answers[questionId] ? answers[questionId] : 0);
     localStorage.setItem('questionId', questionId);
 
+    $('.progress-bar').css('width', ((questionId * 100) / questionsCount) + '%');
+    $('.progress-bar').text(questionId);
     $('.first-question').text(questionsObject[questionId].firstQuestion);
     $('.second-question').text(questionsObject[questionId].secondQuestion);
 }
