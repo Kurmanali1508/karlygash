@@ -4,41 +4,79 @@ if (gender === null || gender === undefined) {
 }
 
 let answers = localStorage.getItem("answers");
-
 if (!answers) {
-    let questionId = 1;
-    localStorage.setItem('questionId', questionId);
+    if (questionsObject.length) {
+        alert('No questions found');
+        window.location.href = 'index.html';
+    }
+    localStorage.setItem('questionId', 1);
+}
 
-    changeQuestion(questionId);
+changeQuestion(localStorage.getItem('questionId'));
+if (parseInt(localStorage.getItem('questionId')) === questionsCount) {
+    $('.next-question').text('Получить результат');
 }
 
 let grade = 0;
 $(document).on('input', '#slider', function() {
-    grade = $(this).val();
+    changeGrade($(this).val());
+});
+
+function changeGrade(grade) {
     grade = grade > 0 ? Math.ceil(grade) : Math.floor(grade);
     localStorage.setItem('grade', grade);
     $('.grade').removeClass('active');
     $('.grade' + grade).addClass('active');
-});
-
+}
 
 $('.next-question').click(function () {
     let answers = localStorage.getItem('answers');
-    let questionId = localStorage.getItem('questionId');
+    let questionId = parseInt(localStorage.getItem('questionId'));
 
-    answers = JSON.parse(answers);
+    answers = answers !== null ? JSON.parse(answers) : {};
     answers[questionId] = localStorage.getItem('grade');
-    questionId++;
-    localStorage.setItem('grade', 0);
     localStorage.setItem('answers', JSON.stringify(answers));
-    localStorage.setItem('questionId', questionId);
-    changeQuestion(questionId)
+
+    if (questionId === questionsCount - 1) {
+        $('.next-question').text('Получить результат');
+    }
+    if (questionId !== questionsCount) {
+        questionId++;
+
+        $('#slider').val(answers[questionId] ? answers[questionId] : 0);
+        changeGrade(answers[questionId] ? answers[questionId] : 0);
+        changeQuestion(questionId);
+        localStorage.setItem('questionId', questionId);
+    } else {
+        window.location.href = 'result.html';
+    }
 });
 
+$('.prev-question').click(function () {
+    let answers = localStorage.getItem('answers');
+    let questionId = parseInt(localStorage.getItem('questionId'));
+
+    answers = answers !== null ? JSON.parse(answers) : {};
+    answers[questionId] = localStorage.getItem('grade');
+    localStorage.setItem('answers', JSON.stringify(answers));
+
+    if (questionId === questionsCount) {
+        $('.next-question').text('Следующий вопрос');
+    }
+
+    if (questionId !== 1) {
+        questionId--;
+
+        $('#slider').val(answers[questionId]);
+        changeGrade(answers[questionId]);
+        changeQuestion(questionId);
+        localStorage.setItem('questionId', questionId);
+    }
+});
 
 
 
 function changeQuestion(questionId) {
-    $('.first-question').text(questionsArray[questionId].firstQuestion);
-    $('.second-question').text(questionsArray[questionId].secondQuestion);
+    $('.first-question').text(questionsObject[questionId].firstQuestion);
+    $('.second-question').text(questionsObject[questionId].secondQuestion);
 }

@@ -12,7 +12,7 @@ $('.gender').click(function() {
     }
 });
 
-let questionsArray = {
+let questionsObject = {
     1: {
         'firstQuestion': 'Обычно мне очень скучно',
         'secondQuestion': 'Обычно я полон энергии',
@@ -114,6 +114,8 @@ let questionsArray = {
         'ascending': false
     }
 };
+
+let questionsCount = Object.keys(questionsObject).length;
 
 let types = {
     'goalsInLife': [3, 4, 10, 16, 17, 18],
