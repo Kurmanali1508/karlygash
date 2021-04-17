@@ -118,10 +118,10 @@ let questionsObject = {
 let questionsCount = Object.keys(questionsObject).length;
 
 let types = {
-    'goalsInLife': [3, 4, 10, 16, 17, 18],
-    'lifeProcess': [1, 2, 4, 5, 7, 9],
-    'lifeResult': [8, 9, 10, 12, 20],
-    'myLocusControl': [1, 15, 16, 19],
-    'lifeLocusControl': [7, 10, 11, 14, 18, 19]
+    'Цели в жизни': [3, 4, 10, 16, 17, 18],
+    'Процесс жизни': [1, 2, 4, 5, 7, 9],
+    'Результативность жизни': [8, 9, 10, 12, 20],
+    'Локус контроля – Я': [1, 15, 16, 19],
+    'Локус контроля – жизнь': [7, 10, 11, 14, 18, 19]
 }
 
