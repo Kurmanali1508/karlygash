@@ -23,7 +23,7 @@ if (parseInt(localStorage.getItem('questionId')) === questionsCount) {
     $('.next-question').text('Получить результат');
 }
 
-$(document).on('input', '#slider', function() {
+$(document).on('change', 'input[type=radio]', function() {
     changeGrade($(this).val());
 });
 
@@ -70,8 +70,10 @@ function changeAnswers() {
 }
 
 function changeQuestion() {
-    $('#slider').val(answers[questionId] ? answers[questionId] : 0);
-    changeGrade(answers[questionId] ? answers[questionId] : 0);
+    let grade = answers[questionId] ? answers[questionId] : 0;
+    grade = isNaN(grade) ? 0 : grade;
+    $("#grade" + grade).prop("checked", true);
+    changeGrade(grade);
     localStorage.setItem('questionId', questionId);
 
     $('.progress-bar').css('width', ((questionId * 100) / questionsCount) + '%');
@@ -86,3 +88,4 @@ function changeGrade(grade) {
     $('.grade').removeClass('active');
     $('.grade' + grade).addClass('active');
 }
+

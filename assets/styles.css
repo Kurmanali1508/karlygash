@@ -1,3 +1,16 @@
 .grade.active {
+    font-size: 2.5rem;
+    color: #0d6efd;
+}
+
+.grade {
     font-size: 1.5rem;
+}
+
+.card {
+    border: 3px solid rgba(0,0,0,.125);
+}
+
+.card-text {
+    font-size: 1.4rem;
 }
